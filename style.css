@@ -135,6 +135,20 @@ main .calculator {
     outline: 3px solid var(--primary_Strong_cyan);
 
 }
+/* how to hide the Arrows from input number
+https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp
+ */
+/* Chrome, Safari, Edge, Opera */
+.input_field input[type=number]::-webkit-outer-spin-button,
+.input_field input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.input_field input[type=number] {
+  -moz-appearance: textfield;
+}
 
 .input_field.flex-container {
     display: flex;
