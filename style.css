@@ -24,7 +24,9 @@
 }
 /* 
 html,body{width: 100%;}
-solvs the issue of the horizontal scrollbar:
+or you could remove the width from the body (ahmed)
+
+to solv the issue of the horizontal scrollbar:
 it happens when the content of 
 the page has a vertical scrollbar 
 which will make the content of the
@@ -92,7 +94,7 @@ main .calculator {
 }
 
 .input_field_container .field_title h2.error {
-    font-size: 0.8em;
+    font-size: 0.65em;
     color: var(--error);
     transition: opacity ease-in-out 0.5s, transform ease-in-out 0.3s;
     transform: translateY(-10px);
@@ -133,6 +135,9 @@ main .calculator {
     color: var(--neutral_Very_dark_cyan);
     direction: rtl;
     caret-color: var(--primary_Strong_cyan);
+}
+.input_error{
+    outline:3px solid var(--error);
 }
 
 .input_field input::placeholder {
