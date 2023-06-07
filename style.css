@@ -22,9 +22,18 @@
     --error: hsl(14, 61%, 47%);
 
 }
-
+/* 
+html,body{width: 100%;}
+solvs the issue of the horizontal scrollbar:
+it happens when the content of 
+the page has a vertical scrollbar 
+which will make the content of the
+page be bigger than the window width
+because (vw) unit doesn't consider the width after having 
+vertical scroll par */
+html,body{width: 100%;}
 body {
-    width: 100vw;
+    /* width: 100vw; */
     min-height: 100vh;
     background-color: var(--neutral_Light_grayish_cyan);
     display: flex;
