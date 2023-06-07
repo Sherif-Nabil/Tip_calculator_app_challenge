@@ -260,7 +260,6 @@ https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp
         flex-direction: column;
         /* background-color: red; */
         justify-content: stretch;
-        border-radius:  20px 20px 0 0;
     }
     .input_section,
     .output_section {
@@ -282,6 +281,7 @@ https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp
 
     main .calculator {
         min-height: 100vh;
+        border-radius:  20px 20px 0 0;
     }
 
 }
