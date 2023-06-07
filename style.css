@@ -6,7 +6,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: inherit;
-    font-size: initial;
+    font-size: inherit;
 }
 
 :root {
@@ -40,9 +40,9 @@ main {
 
 main .title {
     text-align: center;
-    font-size: 1em;
+    font-size: 1.2em;
     letter-spacing: 0.3em;
-    margin-bottom: 60px;
+    margin-bottom: 70px;
     color: var(--neutral_Dark_grayish_cyan);
 }
 
@@ -69,30 +69,26 @@ main .calculator {
     justify-content: space-between;
 }
 
-
-.input_field_container {
-    position: relative;
-}
-
 .input_field_container .field_title {
+    font-size: 0.8em;
     margin-bottom: 10px;
     color: var(--neutral_Dark_grayish_cyan);
 }
 
-.input_field_container .input_field img {
-    position: absolute;
-    top: 55%;
-    left: 15px;
-    width: auto;
-    height: 20px;
-    pointer-events: none;
+/* the text inputs with icons only */
+.input_field:not(.flex-container) input {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: 13px;
+    background-position-x: 20px;
+    background-position-y:50% ;
 
 }
-
-.input_field_container .field_title,
-.input_field_container .input_field,
-.input_field_container .input_field img+input {
-    width: 100%;
+#Bill_input{
+    background-image: url(./images/icon-dollar.svg);
+}
+#people_input{
+    background-image: url(./images/icon-person.svg);
 
 }
 
@@ -100,7 +96,7 @@ main .calculator {
     padding: 10px 20px;
     border-radius: 5px;
     border: 0;
-    font-size: 1.5em;
+    font-size: 1em;
     background-color: var(--neutral_Very_light_grayish_cyan);
     transition: outline ease-in-out 0.1s;
     color: var(--neutral_Very_dark_cyan);
@@ -117,17 +113,17 @@ main .calculator {
 
 }
 
-.flex-container {
+.input_field.flex-container {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
 }
 
-.input_field_container .flex-container * {
-    font-size: 1.5em;
+.input_field.flex-container * {
+    font-size: 1em;
     width: 30%;
     padding: 7px;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .input_field.flex-container input {
@@ -143,7 +139,13 @@ main .calculator {
 }
 
 .input_field_container .flex-container button:hover {
+    background-color: var(--neutral_Light_grayish_cyan);
+    color: var(--neutral_Very_dark_cyan);
+}
+
+.input_field_container .flex-container button:focus {
     background-color: var(--primary_Strong_cyan);
+    outline: 0;
     color: var(--neutral_Very_dark_cyan);
 }
 
