@@ -9,7 +9,7 @@ const tip_buttons_container = document.querySelector(".input_field.flex-containe
 
 // To do 
 // [ ] add delay then delete the content of h2.error
-// [ ] solve the negaive numbers issue
+// [ done/2 ] solve the negaive numbers issue
 
 //function reset
 function resetFunc(){
@@ -98,9 +98,40 @@ tip_buttons_container.addEventListener('click',(e)=>{
         calc(target.innerText);
     }
 });
+
+let tmp_value = 0;
 tip_buttons_container.querySelector('input').addEventListener('input',(e)=>{
-    if(e.target.value!=''){
+    const unWantedChars = ['','-','+','e']
+    const numaricValue = {
+        ...e
+    };
+    if(e.target.valueAsNumber!= NaN){
+        tmp_value = numaricValue.target.valueAsNumber;
+        console.log(tmp_value)
+    }
+
+    if(e.target.value!=''&& !unWantedChars.includes(e.data)){
         calc(e.target.value+'%');
+    }
+    else{
+        calc(0+'%');
+        e.target.value= tmp_value;
+    }
+});
+bill_input.addEventListener('input',(e)=>{
+    const unWantedChars = ['','-','+','e']
+    if(e.target.value!=''&& !unWantedChars.includes(e.data)){
+    }
+    else{
+        e.target.value='';
+    }
+});
+people_input.addEventListener('input',(e)=>{
+    const unWantedChars = ['','-','+','e']
+    if(e.target.value!=''&& !unWantedChars.includes(e.data)){
+    }
+    else{
+        e.target.value='';
     }
 });
 
