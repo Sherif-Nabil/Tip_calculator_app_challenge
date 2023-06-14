@@ -73,7 +73,7 @@ function remove_input_error_style_callback(e) {
     error_massage.classList.remove("fire_error");
 
     //add delay then rmove the innertext of h2
-    // error_massage.innerText = "";
+    setTimeout(()=> error_massage.innerText='',500)
 }
 //unwanted characters
 function unwanted_characters_callback(e) {

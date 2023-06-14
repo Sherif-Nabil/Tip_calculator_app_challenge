@@ -86,6 +86,7 @@ main .calculator {
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .input_field_container .field_title h2 {
