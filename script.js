@@ -9,24 +9,25 @@ const tip_buttons_container = document.querySelector(".input_field.flex-containe
 
 // To do 
 // [ ] add delay then delete the content of h2.error
-// [ done/2 ] solve the negaive numbers issue
+// [ done ] solve the negaive numbers issue
 
+/////////////////// functions
 //function reset
-function resetFunc(){
-    bill_input.value='';
-    custom_tip_input.value='';
-    people_input.value='';
+function reset_callback() {
+    bill_input.value = '';
+    custom_tip_input.value = '';
+    people_input.value = '';
 
-    tip_result.innerText="$0.00";
-    total_result.innerText="$0.00";
+    tip_result.innerText = "$0.00";
+    total_result.innerText = "$0.00";
 
     reset.toggleAttribute("disabled");
 }
 //function fire error
-function hasError(){
+function hasError() {
     let fireError = false;
-    if(bill_input.value==''||bill_input.value=='0'){
-        fireError= true;
+    if (bill_input.value == '' || bill_input.value == '0') {
+        fireError = true;
         bill_input.classList.add('input_error');
         const parent = bill_input.parentElement.parentElement;
         const error_massage = parent.querySelector(".error");
@@ -34,7 +35,7 @@ function hasError(){
         error_massage.classList.remove("out_error");
         error_massage.classList.add("fire_error");
     }
-    else{
+    else {
         bill_input.classList.remove('input_error');
 
         const parent = bill_input.parentElement.parentElement;
@@ -43,8 +44,8 @@ function hasError(){
         error_massage.classList.remove("fire_error");
     }
 
-    if(people_input.value==''||people_input.value=='0'){
-        fireError= true;
+    if (people_input.value == '' || people_input.value == '0') {
+        fireError = true;
         people_input.classList.add('input_error');
         const parent = people_input.parentElement.parentElement;
         const error_massage = parent.querySelector(".error");
@@ -52,7 +53,7 @@ function hasError(){
         error_massage.classList.add("fire_error");
 
     }
-    else{
+    else {
         people_input.classList.remove('input_error');
 
         const parent = people_input.parentElement.parentElement;
@@ -61,21 +62,45 @@ function hasError(){
         error_massage.classList.remove("fire_error");
 
     }
-    
+
     return fireError;
 }
+//input Error callback
+function remove_input_error_style_callback(e) {
+    const element = e.target;
+    element.classList.remove('input_error');
+    const error_massage = element.parentElement.parentElement.querySelector(".error");
+    error_massage.classList.remove("fire_error");
+
+    //add delay then rmove the innertext of h2
+    // error_massage.innerText = "";
+}
+//unwanted characters
+function unwanted_characters_callback(e) {
+    const unWantedChars = ['', '-', '+', 'e', ' ']
+    if (unWantedChars.includes(e.key)) {
+        e.preventDefault();
+    }
+}
 //function calc
-function calc(tip_percentage){
-    if(hasError()){
+function calc(tip_percentage) {
+    if (hasError()) {
         // console.log("error");
         return
     }
 
-    tip_percentage = tip_percentage.substring(0,tip_percentage.indexOf('%'));
-    tip_percentage = parseFloat(tip_percentage)/100;
+    if (tip_percentage == '0%') {
+        console.log('reset to zero')
+        tip_result.innerText = '$0.00';
+        total_result.innerText = '$0.00';
+        return
+    }
+
+    tip_percentage = tip_percentage.substring(0, tip_percentage.indexOf('%'));
+    tip_percentage = parseFloat(tip_percentage) / 100;
 
     //calculate the valuse
-    if(reset.hasAttribute("disabled")){
+    if (reset.hasAttribute("disabled")) {
         reset.removeAttribute("disabled");
     }
     const bill_value = parseFloat(bill_input.value);
@@ -85,73 +110,48 @@ function calc(tip_percentage){
     const tip_amount = person_bill * tip_percentage;
     const total = person_bill + tip_amount;
 
-    tip_result.innerText='$'+tip_amount.toFixed(2);
-    total_result.innerText = '$'+total.toFixed(2);
+    tip_result.innerText = '$' + tip_amount.toFixed(2);
+    total_result.innerText = '$' + total.toFixed(2);
 
 }
-//evnet listner
-reset.addEventListener('click',resetFunc)
 
-tip_buttons_container.addEventListener('click',(e)=>{
+/////////////////// evnet listner
+reset.addEventListener('click', reset_callback)
+
+tip_buttons_container.addEventListener('click', (e) => {
     const target = e.target;
-    if (target.tagName == 'BUTTON'){
+    if (target.tagName == 'BUTTON') {
         calc(target.innerText);
     }
 });
+// custom tip input __start__
+custom_tip_input.addEventListener('keydown', (e) => {
+    const unWantedChars = ['', '-', '+', 'e', ' '];
+    // console.log(e);
 
-let tmp_value = 0;
-tip_buttons_container.querySelector('input').addEventListener('input',(e)=>{
-    const unWantedChars = ['','-','+','e']
-    const numaricValue = {
-        ...e
-    };
-    if(e.target.valueAsNumber!= NaN){
-        tmp_value = numaricValue.target.valueAsNumber;
-        console.log(tmp_value)
-    }
-
-    if(e.target.value!=''&& !unWantedChars.includes(e.data)){
-        calc(e.target.value+'%');
-    }
-    else{
-        calc(0+'%');
-        e.target.value= tmp_value;
-    }
-});
-bill_input.addEventListener('input',(e)=>{
-    const unWantedChars = ['','-','+','e']
-    if(e.target.value!=''&& !unWantedChars.includes(e.data)){
-    }
-    else{
-        e.target.value='';
-    }
-});
-people_input.addEventListener('input',(e)=>{
-    const unWantedChars = ['','-','+','e']
-    if(e.target.value!=''&& !unWantedChars.includes(e.data)){
-    }
-    else{
-        e.target.value='';
+    if (unWantedChars.includes(e.key)) {
+        console.log('prevent:', e.key, 'input value', e.target.value);
+        e.preventDefault();
     }
 });
 
-bill_input.addEventListener('focus',(e)=>{
-    const element = e.target;
-    element.classList.remove('input_error');
-    const error_massage = element.parentElement.parentElement.querySelector(".error");
-    error_massage.classList.remove("fire_error");
-
-    //add delay then rmove the innertext of h2
-    // error_massage.innerText = "";
+custom_tip_input.addEventListener('input', (e) => {
+    const value = e.target.value;
+    // console.log(typeof value,value);
+    if (value == '' || value == ' ') {
+        console.log('calc 0');
+        calc(0 + '%')
+    }
+    else {
+        console.log('calc ' + value);
+        calc(value + '%')
+    }
 });
+// custom tip input __end__
 
-people_input.addEventListener('focus',(e)=>{
-    const element = e.target;
-    element.classList.remove('input_error');
-    const error_massage = element.parentElement.parentElement.querySelector(".error");
-    error_massage.classList.remove("fire_error");
+bill_input.addEventListener('keydown', unwanted_characters_callback);
+people_input.addEventListener('keydown', unwanted_characters_callback);
 
-    //add delay then rmove the innertext of h2
-    // error_massage.innerText = "";
+bill_input.addEventListener('focus', remove_input_error_style_callback);
 
-});
+people_input.addEventListener('focus', remove_input_error_style_callback);
