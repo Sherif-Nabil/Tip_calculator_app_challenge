@@ -139,7 +139,7 @@ custom_tip_input.addEventListener('input', (e) => {
     const value = e.target.value;
     // console.log(typeof value,value);
     if (value == '' || value == ' ') {
-        console.log('calc 0');
+        // console.log('calc 0');
         calc(0 + '%')
     }
     else {

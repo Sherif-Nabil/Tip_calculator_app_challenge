@@ -25,13 +25,13 @@ Users should be able to:
 ### Screenshot
 - Desktop
 ---
-![](./ScreenShots/Screenshot_Desktop.jpeg)
+![](./ScreenShots/ScreenShot_Desktop.jpeg)
 - Tablet
 ---
-![](./ScreenShots/Screenshot_Tablet.jpeg)
+![](./ScreenShots/ScreenShot_Tablet.jpeg)
 - Mobile
 ---
-![](./ScreenShots/Screenshot_Mobile.jpeg)
+![](./ScreenShots/ScreenShot_Mobile.jpeg)
 
 
 ### Links
