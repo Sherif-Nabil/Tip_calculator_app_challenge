@@ -73,7 +73,7 @@ function remove_input_error_style_callback(e) {
     error_massage.classList.remove("fire_error");
 
     //add delay then rmove the innertext of h2
-    setTimeout(()=> error_massage.innerText='',500)
+    setTimeout(() => error_massage.innerText = '', 500)
 }
 //unwanted characters
 function unwanted_characters_callback(e) {
@@ -90,7 +90,7 @@ function calc(tip_percentage) {
     }
 
     if (tip_percentage == '0%') {
-        console.log('reset to zero')
+        // console.log('reset to zero')
         tip_result.innerText = '$0.00';
         total_result.innerText = '$0.00';
         return
@@ -130,7 +130,7 @@ custom_tip_input.addEventListener('keydown', (e) => {
     // console.log(e);
 
     if (unWantedChars.includes(e.key)) {
-        console.log('prevent:', e.key, 'input value', e.target.value);
+        // console.log('prevent:', e.key, 'input value', e.target.value);
         e.preventDefault();
     }
 });
@@ -143,7 +143,7 @@ custom_tip_input.addEventListener('input', (e) => {
         calc(0 + '%')
     }
     else {
-        console.log('calc ' + value);
+        // console.log('calc ' + value);
         calc(value + '%')
     }
 });
