@@ -8,7 +8,7 @@ const reset = document.getElementById("reset");
 const tip_buttons_container = document.querySelector(".input_field.flex-container");
 
 // To do 
-// [ ] add delay then delete the content of h2.error
+// [ done ] add delay then delete the content of h2.error
 // [ done ] solve the negaive numbers issue
 
 /////////////////// functions
@@ -21,51 +21,42 @@ function reset_callback() {
     tip_result.innerText = "$0.00";
     total_result.innerText = "$0.00";
 
+    //removing the errors
+    remove_input_error_style(bill_input);
+    remove_input_error_style(people_input);
+
     reset.toggleAttribute("disabled");
 }
 //function fire error
 function hasError() {
     let fireError = false;
-    if (bill_input.value == '' || bill_input.value == '0') {
+    if (bill_input.value == '' || parseFloat(bill_input.value) == 0) {
         fireError = true;
         bill_input.classList.add('input_error');
-        const parent = bill_input.parentElement.parentElement;
-        const error_massage = parent.querySelector(".error");
+        const error_massage = bill_input.parentElement.parentElement.querySelector(".error");
         error_massage.innerText = "Can't be zero";
-        error_massage.classList.remove("out_error");
         error_massage.classList.add("fire_error");
     }
-    else {
-        bill_input.classList.remove('input_error');
 
-        const parent = bill_input.parentElement.parentElement;
-        const error_massage = parent.querySelector(".error");
-        error_massage.innerText = "";
-        error_massage.classList.remove("fire_error");
-    }
-
-    if (people_input.value == '' || people_input.value == '0') {
+    if (people_input.value == '' || parseFloat(people_input.value) == 0) {
         fireError = true;
         people_input.classList.add('input_error');
-        const parent = people_input.parentElement.parentElement;
-        const error_massage = parent.querySelector(".error");
+        const error_massage = people_input.parentElement.parentElement.querySelector(".error");
         error_massage.innerText = "Can't be zero";
         error_massage.classList.add("fire_error");
-
-    }
-    else {
-        people_input.classList.remove('input_error');
-
-        const parent = people_input.parentElement.parentElement;
-        const error_massage = parent.querySelector(".error");
-        error_massage.innerText = "";
-        error_massage.classList.remove("fire_error");
-
     }
 
     return fireError;
 }
 //input Error callback
+function remove_input_error_style(input_element) {
+    input_element.classList.remove('input_error');
+    const error_massage = input_element.parentElement.parentElement.querySelector(".error");
+    error_massage.classList.remove("fire_error");
+
+    //add delay then rmove the innertext of h2
+    setTimeout(() => error_massage.innerText = '', 500)
+}
 function remove_input_error_style_callback(e) {
     const element = e.target;
     element.classList.remove('input_error');
@@ -78,7 +69,7 @@ function remove_input_error_style_callback(e) {
 //unwanted characters
 function unwanted_characters_callback(e) {
     const unWantedChars = ['', '-', '+', 'e', ' ']
-    if (unWantedChars.includes(e.key)) {
+    if (unWantedChars.includes(e.key)||(e.target.id == 'people_input'&& e.key =='.')) {
         e.preventDefault();
     }
 }
